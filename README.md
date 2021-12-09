@@ -1,2 +1,2 @@
 # Anti_Deep_Fake_Extension
-an chrome extension detecting deep fake picture on web page
+an chrome extension detecting deepfake picture on web page
