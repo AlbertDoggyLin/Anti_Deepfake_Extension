@@ -1,12 +1,16 @@
 {
     "name": "Anti Deep Fake Extension",
-    "description": "Distinguish the deep faked pictures in websites you open",
+    "description": "Distinguish the deepfaked pictures in websites you open",
     "version": "1.0", 
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
     },
     "permissions": ["storage", "activeTab", "scripting"],
+    "content_security_policy" : {
+        "default-src": ["self"],
+        "script-src": ["self", "ortScript.js"]
+    },
     "action": {
         "default_popup": "popup.html",
         "default_icon":{
