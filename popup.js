@@ -1,37 +1,38 @@
 let session;
-async function prework(){
-    let startBut = document.getElementById("StartButton")
-    startBut.style.backgroundColor = 'green';
-    session = await ort.InferenceSession.create('./AntiDeepfake_mobilenetv3_small.onnx');
-    startBut.addEventListener("click", async()=>{
-        let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            function: main
-        });
-    });
+const isFake=()=>{
+    return false;
 }
-prework();
-async function main(){
+async function prework(){
+    let startBut = document.getElementById("StartButton");
+    startBut.style.backgroundColor = 'green';
     try{
-        let color={fakeColor: 'red', realColor: 'green'}
-        console.log(`session=${session}`)
-        function isFake(img){
-            return false;
-        };
-        let images = document.getElementsByTagName('img');
-        for(let i = 0; i < images.length; i++) {
-            images[i].style.boxSizing = "border-box";
-            if(isFake(images[i])){
-                images[i].style.border=`${color.fakeColor} 5px solid`;
-            }
-            else{
-                images[i].style.border=`${color.realColor} 5px solid`;
-            }
-        }
+        startBut.addEventListener("click", async()=>{
+            // chrome.storage.sync.set({ort:res});
+            let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+            chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                function: main
+            });
+        });
     }
     catch(e){
         console.log(e);
     }
+}
+prework();
+async function main(){
+    var script = document.createElement("script");
+    script.src = chrome.runtime.getURL('ortScript.js');
+    script.onload = async function () {
+        console.log("onload");
+    };
+    // append and execute script
+    document.documentElement.firstChild.appendChild(script);
+    var script = document.createElement("script");
+    script.src = chrome.runtime.getURL('run.js');
+    script.onload = async function () {
+        console.log("onload");
+    };
+    document.documentElement.firstChild.appendChild(script);
 }
 

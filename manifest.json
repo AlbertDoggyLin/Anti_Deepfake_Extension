@@ -31,5 +31,9 @@
         "32":"/images/get_started32.png",
         "48":"/images/get_started48.png",
         "128":"/images/get_started128.png"
-    }
+    },
+    "web_accessible_resources": [{
+        "resources": ["ortScript.js", "run.js", "AntiDeepfake_mobilenetv3_small.onnx", "ort-wasm-simd.wasm"],
+        "matches": ["https://*/*"]
+    }]
 }
