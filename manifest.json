@@ -1,12 +1,22 @@
 {
     "name": "Anti Deep Fake Extension",
-    "description": "Distinguish the deep faked pictures in websites you open",
+    "description": "Distinguish the deepfaked pictures in websites you open",
     "version": "1.0", 
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
     },
     "permissions": ["storage", "activeTab", "scripting"],
+    "content_security_policy" : {
+        "default-src": ["self"],
+        "script-src": ["self", "ortScript.js"]
+    },
+    "cross_origin_embedder_policy": {
+      "value": "require-corp"
+    },
+    "cross_origin_opener_policy": {
+      "value": "same-origin"
+    },
     "action": {
         "default_popup": "popup.html",
         "default_icon":{
@@ -21,5 +31,9 @@
         "32":"/images/get_started32.png",
         "48":"/images/get_started48.png",
         "128":"/images/get_started128.png"
-    }
+    },
+    "web_accessible_resources": [{
+        "resources": ["ortScript.js", "run.js", "AntiDeepfake_mobilenetv3_small.onnx", "ort-wasm-simd.wasm"],
+        "matches": ["https://*/*"]
+    }]
 }
