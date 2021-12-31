@@ -18,8 +18,6 @@ async function main(){
               // Run model with Tensor inputs and get the result.
               const outputMap = await session.run({modelInput: inputTensor});
               const outputData = outputMap.modelOutput.data;
-              // Render the output result in html.
-              printMatches(outputData);
               images[i].setAttribute('a0', outputData[0]);
               images[i].setAttribute('a1', outputData[1]);
               if(Math.abs(outputData[0])+ Math.abs(outputData[1])>700){
