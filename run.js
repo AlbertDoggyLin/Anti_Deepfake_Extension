@@ -1,6 +1,6 @@
 async function main(){
     try{
-        session = await ort.InferenceSession.create('chrome-extension:/mphenioebcpfeiodeaohhhlghodnkned/AntiDeepfake_mobilenetv3_small.onnx');
+        session = await ort.InferenceSession.create('chrome-extension:/gigikbccklapgjcpiochkkghponcoeee/AntiDeepfake_mobilenetv3_small.onnx');
         let color = {fakeColor: 'red', realColor: 'green'}
         let images = document.getElementsByTagName('img');
         const imageSize = 224;
@@ -8,7 +8,7 @@ async function main(){
             images[i].style.boxSizing = "border-box";
             const width = imageSize;
             const height = imageSize;
-            const imageLoader = new ImageLoader(imageSize, imageSize);
+            const imageLoader = new Imageloader(imageSize, imageSize);
             const imageData = await imageLoader.getImageData(images[i].src);
             // preprocess the image data to match input dimension requirement, which is 1*3*224*224
             const preprocessedData = preprocess(imageData.data, width, height);
