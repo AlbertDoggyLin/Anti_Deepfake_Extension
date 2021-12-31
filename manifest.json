@@ -33,7 +33,7 @@
         "128":"/images/get_started128.png"
     },
     "web_accessible_resources": [{
-        "resources": ["ortScript.js", "run.js", "AntiDeepfake_mobilenetv3_small.onnx", "ort-wasm-simd.wasm"],
+        "resources": ["ortScript.js", "run.js", "AntiDeepfake_mobilenetv3_small.onnx", "ort-wasm-simd.wasm","min.js","ndarray-browser-min.js","imagenet.js","image-loader.js"],
         "matches": ["https://*/*"]
     }]
 }
