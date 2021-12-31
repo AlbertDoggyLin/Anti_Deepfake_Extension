@@ -1,6 +1,6 @@
 async function main(){
     try{
-        session = await ort.InferenceSession.create('chrome-extension:/gigikbccklapgjcpiochkkghponcoeee/AntiDeepfake_mobilenetv3_small.onnx');
+        session = await ort.InferenceSession.create('chrome-extension:/mphenioebcpfeiodeaohhhlghodnkned/AntiDeepfake_mobilenetv3_small.onnx');
         let color = {fakeColor: 'red', realColor: 'green'}
         let images = document.getElementsByTagName('img');
         const imageSize = 224;

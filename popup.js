@@ -21,42 +21,41 @@ async function prework(){
 }
 prework();
 async function main(){
-    var script = document.createElement("script");
+    //好帥XD
+    let script = document.createElement("script");
     script.src = chrome.runtime.getURL('ortScript.js');
     script.onload = async function () {
-        console.log("onload");
-    };
-    // append and execute script
-    var script = document.createElement("script");
-    script.src = chrome.runtime.getURL('min.js');
-    script.onload = async function () {
-        console.log("onload");
-    };
-    document.documentElement.firstChild.appendChild(script);
-    var script = document.createElement("script");
-    script.src = chrome.runtime.getURL('run.js');
-    script.onload = async function () {
-        console.log("onload");
-    };
-
-    var script = document.createElement("script");
-    script.src = chrome.runtime.getURL('image-loader.js');
-    script.onload = async function () {
-        console.log("onload");
-    };
-    document.documentElement.firstChild.appendChild(script);
-
-    var script = document.createElement("script");
-    script.src = chrome.runtime.getURL('ndarray-browser-min.js');
-    script.onload = async function () {
-        console.log("onload");
-    };
-    document.documentElement.firstChild.appendChild(script);
-
-    var script = document.createElement("script");
-    script.src = chrome.runtime.getURL('imagenet.js');
-    script.onload = async function () {
-        console.log("onload");
+        console.log("ortScript onload");
+        let script = document.createElement("script");
+        script.src = chrome.runtime.getURL('min.js');
+        script.onload = async function () {
+            console.log("min onload");
+            let script = document.createElement("script");
+            script.src = chrome.runtime.getURL('image-loader.js');
+            script.onload = async function () {
+                console.log("image-loader onload");
+                let script = document.createElement("script");
+                script.src = chrome.runtime.getURL('ndarray-browser-min.js');
+                script.onload = async function () {
+                    console.log("ndarray-browser-min onload");
+                    let script = document.createElement("script");
+                    script.src = chrome.runtime.getURL('imagenet.js');
+                    script.onload = async function () {
+                        console.log("imagenet onload");
+                        let script = document.createElement("script");
+                        script.src = chrome.runtime.getURL('run.js');
+                        script.onload = async function () {
+                            console.log("run onload");
+                        };
+                        document.documentElement.firstChild.appendChild(script);
+                    };
+                    document.documentElement.firstChild.appendChild(script);
+                };
+                document.documentElement.firstChild.appendChild(script);
+            };
+            document.documentElement.firstChild.appendChild(script);
+        };
+        document.documentElement.firstChild.appendChild(script);
     };
     document.documentElement.firstChild.appendChild(script);
 }
