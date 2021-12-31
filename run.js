@@ -8,22 +8,28 @@ async function main(){
             images[i].style.boxSizing = "border-box";
             const width = imageSize;
             const height = imageSize;
-            const imageLoader = new ImageLoader(imageSize, imageSize);
-            const imageData = await imageLoader.getImageData(images[i].src);
-            // preprocess the image data to match input dimension requirement, which is 1*3*224*224
-            const preprocessedData = preprocess(imageData.data, width, height);
-            const inputTensor = new onnx.Tensor(preprocessedData, 'float32', [1, 3, width, height]);
-            // Run model with Tensor inputs and get the result.
-            const outputMap = await session.run([inputTensor]);
-            const outputData = outputMap.values().next().value.data;
-            // Render the output result in html.
-            //printMatches(outputData);
-            console.log(outputData)
-            if(false){
-                images[i].style.border=`${color.fakeColor} 5px solid`;
+            images[i].style.border=`${color.realColor} 5px solid`;
+            try{
+              const imageLoader = await new ImageLoader(imageSize, imageSize);
+              const imageData = await imageLoader.getImageData(images[i].src);
+              // preprocess the image data to match input dimension requirement, which is 1*3*224*224
+              const preprocessedData = preprocess(imageData.data, width, height);
+              const inputTensor = new onnx.Tensor(preprocessedData, 'float32', [1, 3, width, height]);
+              // Run model with Tensor inputs and get the result.
+              const outputMap = await session.run([inputTensor]);
+              const outputData = outputMap.values().next().value.data;
+              // Render the output result in html.
+              //printMatches(outputData);
+              console.log(outputData)
+              if(false){
+                  images[i].style.border=`${color.fakeColor} 5px solid`;
+              }
+              else{
+                  images[i].style.border=`${color.realColor} 5px solid`;
+              }
             }
-            else{
-                images[i].style.border=`${color.realColor} 5px solid`;
+            catch(e2){
+              console.log(e2);
             }
         }
     }
