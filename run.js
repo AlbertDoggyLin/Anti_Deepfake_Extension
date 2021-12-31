@@ -16,12 +16,13 @@ async function main(){
               const preprocessedData = preprocess(imageData.data, width, height);
               const inputTensor = new onnx.Tensor(preprocessedData, 'float32', [1, 3, width, height]);
               // Run model with Tensor inputs and get the result.
-              const outputMap = await session.run([inputTensor]);
-              const outputData = outputMap.values().next().value.data;
+              const outputMap = await session.run({modelInput: inputTensor});
+              const outputData = outputMap.modelOutput.data;
               // Render the output result in html.
-              //printMatches(outputData);
-              console.log(outputData)
-              if(false){
+              printMatches(outputData);
+              images[i].setAttribute('a0', outputData[0]);
+              images[i].setAttribute('a1', outputData[1]);
+              if(Math.abs(outputData[0])+ Math.abs(outputData[1])>700){
                   images[i].style.border=`${color.fakeColor} 5px solid`;
               }
               else{
