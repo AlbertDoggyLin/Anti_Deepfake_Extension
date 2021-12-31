@@ -2,26 +2,7 @@ let session;
 const isFake=()=>{
     return false;
 }
-async function prework(){
-    let startBut = document.getElementById("StartButton");
-    startBut.style.backgroundColor = 'red';
-    try{
-        startBut.addEventListener("click", async()=>{
-            // chrome.storage.sync.set({ort:res});
-            let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-            chrome.scripting.executeScript({
-                target: { tabId: tab.id },
-                function: main
-            });
-        });
-    }
-    catch(e){
-        console.log(e);
-    }
-}
-prework();
-async function main(){
-    //好帥XD
+async function targetWebSitePreWork(){
     let script = document.createElement("script");
     script.src = chrome.runtime.getURL('ortScript.js');
     script.onload = async function () {
@@ -42,12 +23,6 @@ async function main(){
                     script.src = chrome.runtime.getURL('imagenet.js');
                     script.onload = async function () {
                         console.log("imagenet onload");
-                        let script = document.createElement("script");
-                        script.src = chrome.runtime.getURL('run.js');
-                        script.onload = async function () {
-                            console.log("run onload");
-                        };
-                        document.documentElement.firstChild.appendChild(script);
                     };
                     document.documentElement.firstChild.appendChild(script);
                 };
@@ -56,6 +31,37 @@ async function main(){
             document.documentElement.firstChild.appendChild(script);
         };
         document.documentElement.firstChild.appendChild(script);
+    };
+    document.documentElement.firstChild.appendChild(script);
+}
+async function prework(){
+    let startBut = document.getElementById("StartButton");
+    startBut.style.backgroundColor = 'red';
+    try{
+        let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+        chrome.scripting.executeScript({
+            target:{ tabId: tab.id},
+            function: targetWebSitePreWork
+        })
+        startBut.addEventListener("click", async()=>{
+            // chrome.storage.sync.set({ort:res});
+            let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+            chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                function: main
+            });
+        });
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+prework();
+async function main(){
+    let script = document.createElement("script");
+    script.src = chrome.runtime.getURL('run.js');
+    script.onload = async function () {
+        console.log("run onload");
     };
     document.documentElement.firstChild.appendChild(script);
 }

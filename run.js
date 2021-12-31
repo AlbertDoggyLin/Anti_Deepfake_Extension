@@ -35,7 +35,7 @@ async function main(){
  * Preprocess raw image data to match SqueezeNet requirement.
  */
 function preprocess(data, width, height) {
-  const dataFromImage = nda7rray(new Float32Array(data), [width, height, 4]);
+  const dataFromImage = ndarray(new Float32Array(data), [width, height, 4]);
   const dataProcessed = ndarray(new Float32Array(width * height * 3), [1, 3, height, width]);
 
   // Normalize 0-255 to (-1)-1
