@@ -25,7 +25,8 @@ class ImageLoader {
       url,
       img => {
         if (img.type === 'error') {
-          throw `Could not load image: ${url}`;
+          console.log(`Could not load image: ${url}`);
+          window.setTimeout(() => { cb(); }, 0);
         } else {
           // load image data onto input canvas
           this.ctx.drawImage(img, 0, 0)
