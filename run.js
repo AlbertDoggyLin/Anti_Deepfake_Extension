@@ -60,5 +60,4 @@ function preprocess(data, width, height) {
   return dataProcessed.data;
 }
 
-
 main();
