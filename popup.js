@@ -36,7 +36,7 @@ async function targetWebSitePreWork(){
 }
 async function prework(){
     let startBut = document.getElementById("StartButton");
-    startBut.style.backgroundColor = 'red';
+    startBut.style.backgroundColor = 'black';
     try{
         let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
         chrome.scripting.executeScript({
