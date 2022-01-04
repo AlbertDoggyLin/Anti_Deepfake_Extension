@@ -4,7 +4,6 @@ async function deal(image){
   image.style.boxSizing = "border-box";
   const width = imageSize;
   const height = imageSize;
-  image.style.border=`${color.realColor} 5px solid`;
   try{
     const imageLoader = await new ImageLoader(imageSize, imageSize);
     const imageData = await imageLoader.getImageData(image.src);
@@ -16,7 +15,7 @@ async function deal(image){
     const outputData = outputMap.modelOutput.data;
     image.setAttribute('a0', outputData[0]);
     image.setAttribute('a1', outputData[1]);
-    if(outputData[0]<outputData[1] && Math.abs(outputData[0]-outputData[1])>100){
+    if(outputData[1]-outputData[0]>250){
         image.style.border=`${color.fakeColor} 5px solid`;
     }
     else{

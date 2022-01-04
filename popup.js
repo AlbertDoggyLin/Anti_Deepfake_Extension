@@ -34,7 +34,7 @@ async function targetWebSitePreWork(){
     };
     document.documentElement.firstChild.appendChild(script);
 }
-async function prework(){
+ function prework(){
     let startBut = document.getElementById("StartButton");
     startBut.style.backgroundColor = 'red';
     try{
@@ -58,7 +58,7 @@ async function prework(){
 }
 prework();
 async function main(){
-    let script = document.createElement("script");
+    var script = document.createElement("script");
     script.src = chrome.runtime.getURL('run.js');
     script.onload = async function () {
         console.log("run onload");
