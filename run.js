@@ -29,7 +29,7 @@ async function deal(image){
 
 async function main(){
     try{
-        session = await ort.InferenceSession.create('chrome-extension:/gigikbccklapgjcpiochkkghponcoeee/AntiDeepfake_mobilenetv3_small.onnx');
+        session = await ort.InferenceSession.create('chrome-extension:/mphenioebcpfeiodeaohhhlghodnkned/AntiDeepfake_mobilenetv3_small.onnx');
         let images = document.getElementsByTagName('img');
         for(let i = 0; i < images.length; i++) {
           deal(images[i]);

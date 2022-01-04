@@ -34,7 +34,7 @@ async function targetWebSitePreWork(){
     };
     document.documentElement.firstChild.appendChild(script);
 }
- function prework(){
+async function prework(){
     let startBut = document.getElementById("StartButton");
     startBut.style.backgroundColor = 'black';
     try{
