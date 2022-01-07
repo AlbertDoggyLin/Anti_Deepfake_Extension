@@ -15,7 +15,7 @@ async function deal(image){
     const outputData = outputMap.modelOutput.data;
     image.setAttribute('a0', outputData[0]);
     image.setAttribute('a1', outputData[1]);
-    if(outputData[1]-outputData[0]>250){
+    if(outputData[1] - outputData[0] > 30 && Math.abs(outputData[1] + outputData[0])>30){
         image.style.border=`${color.fakeColor} 5px solid`;
     }
     else{
